@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'Punishment';
+    src: url('/fonts/Punishment.otf');
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'American Captain';
+    src: url('/fonts/American Captain.tiff');
+    font-weight: normal;
+}
+
+$font-title:'Punishment',sans-serif;
+$font-nav:'American Captain',sans-serif;
+
+$search-icon:#E11C24;

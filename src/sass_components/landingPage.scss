@@ -1,0 +1,10 @@
+@import 'nav.scss';
+@import 'header.scss';
+
+.landingPage{
+    width: 100%;
+    height: 100vh;
+    min-height: 800px;
+    background: url(images/bcg-landing.jpg) no-repeat center;
+    background-size: cover;
+  }
