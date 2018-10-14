@@ -7,7 +7,7 @@ render(){
     return(
         <div className="landingPage">
            <Nav/>
-           <Header title="Home Cinema"/>
+           <Header title="home cinema"/>
         </div>
    
     );

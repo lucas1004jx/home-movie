@@ -2,15 +2,22 @@
     position: absolute;
     bottom: 5%;
     color:#fff;
-    font-family: $font-title,sans-serif;
+    font-family: $font-title;
     text-align: center;
     width: 100%;
     h1{
         font-size: 100px;
         margin: 0;
+        text-transform: uppercase;
+        line-height: 1.4;
+        font-weight: normal;
     }
     h2{
         font-size: 60px;
         margin: 0;
+        font-family: $font-nav;
+        line-height: 1.4;
+        margin-bottom: 20px;
+        font-weight: normal;
     }
 }
