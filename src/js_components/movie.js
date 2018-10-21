@@ -18,10 +18,12 @@ export default class Movie extends Component {
     render() { 
         return (    
                 <li className='movie' onClick={this.handleOnClick}>
+                <div className='info'>
                 <h2 className='title'>{this.props.title}</h2>
                 <p className='original-title'>({this.props.original_title})</p>
                 <span className='votes'>{this.props.votes}</span>
                 <span className='release-date'>{this.props.date}</span>
+                </div>
                 <img src={this.props.poster} className='poster' alt={this.props.title}/>
                 </li>
                    

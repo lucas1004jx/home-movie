@@ -20,29 +20,34 @@ import React,{Component} from 'react';
 
 export default class Display extends Component{
     render(){
+        const posterStyle={
+            backgroundImage:`url(${this.props.poster})`,
+            backgroundRepeat:'no-repeat',
+            backgroundPosition:'center center',
+            backgroundSize:'cover'
+        }
         return(
          <div className="poster-descri">
-        <div className="poster">
-        <img src={this.props.poster} alt={this.props.title}/>
+        <div className="poster" style={posterStyle}>
         </div>
         <div className="descri">
-        <div className="title">
-        <h2>título: <span className="spanish-title">{this.props.title}</span></h2>
-        <h2>título original: <span className="original-title">{this.props.original_title}</span> </h2>
+        <div className="title-container">
+        <h2 className="title">título: <span >{this.props.title}</span></h2>
+        <h2 className="original-title">título original: <span >{this.props.original_title}</span> </h2>
         </div>
-        <div>
+        <div className='vote-container'>
             <p>votos</p>
             <p className="vote">{this.props.votes}</p>
         </div>
-        <div>
-            <p>Popularidad</p>
-            <p className="poplularity">{this.props.popularity}</p>
+        <div className='total-votes-container'>
+            <p>votos totales</p>
+            <p className="total-votes">{this.props.total_votes}</p>
         </div>
-        <div>
+        <div className='date-container'>
             <p>fecha de estreno:</p>
             <p className="release-date">{this.props.date}</p>
         </div>
-        <div>
+        <div className=' overview-container'>
             <h3>resumen</h3>
             <p className="overview">{this.props.overview}</p>
         </div>
