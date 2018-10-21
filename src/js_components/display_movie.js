@@ -23,28 +23,28 @@ export default class Display extends Component{
         return(
          <div className="poster-descri">
         <div className="poster">
-        <img src="" alt="movie poster"></img>
+        <img src={this.props.poster} alt={this.props.title}/>
         </div>
         <div className="descri">
         <div className="title">
-        <h2>título: <span className="spanish-title"></span></h2>
-        <h2>título original: <span className="original-title"></span> </h2>
+        <h2>título: <span className="spanish-title">{this.props.title}</span></h2>
+        <h2>título original: <span className="original-title">{this.props.original_title}</span> </h2>
         </div>
         <div>
             <p>votos</p>
-            <p className="vote"></p>
+            <p className="vote">{this.props.votes}</p>
         </div>
         <div>
             <p>Popularidad</p>
-            <p className="poplularity"></p>
+            <p className="poplularity">{this.props.popularity}</p>
         </div>
         <div>
             <p>fecha de estreno:</p>
-            <p className="release-date"></p>
+            <p className="release-date">{this.props.date}</p>
         </div>
         <div>
             <h3>resumen</h3>
-            <p className="overview"></p>
+            <p className="overview">{this.props.overview}</p>
         </div>
         </div>
         </div>
