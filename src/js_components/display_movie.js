@@ -28,7 +28,8 @@ export default class Display extends Component{
         }
         return(
          <div className="poster-descri">
-        <div className="poster" style={posterStyle}>
+        <div className="poster">
+        <img src={this.props.poster}/>
         </div>
         <div className="descri">
         <div className="title-container">
@@ -40,7 +41,7 @@ export default class Display extends Component{
             <p className="vote">{this.props.votes}</p>
         </div>
         <div className='total-votes-container'>
-            <p>votos totales</p>
+            <p>votos totales:</p>
             <p className="total-votes">{this.props.total_votes}</p>
         </div>
         <div className='date-container'>

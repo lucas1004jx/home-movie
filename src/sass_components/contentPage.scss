@@ -4,10 +4,8 @@
     min-height:calc(100vh - 40px);
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows:  minmax(700px,1000px) minmax(300px,350px);
+    grid-template-rows:  auto minmax(300px,350px);
     grid-template-areas:  'poster-descri' 'movies';
    background-color: #000;
     
-   
-
  }

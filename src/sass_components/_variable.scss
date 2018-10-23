@@ -1,10 +1,4 @@
-@font-face {
-    font-family: 'Avengeance Heroic Avenger';
-    src: url('./fonts/AvengeanceHeroicAvengerNormal.woff2') format('woff2'),
-        url('./fonts/AvengeanceHeroicAvengerNormal.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+
 @font-face {
     font-family: 'American Captain';
     src: url('./fonts/AmericanCaptain.woff2') format('woff2'),
@@ -13,6 +7,18 @@
     font-style: normal;
 }
 
+@font-face{
+    font-family: "Benton Sans";
+    src: url('./fonts/bentonsans-medium-webfont.ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face{
+    font-family: "Benton Sans";
+    src: url('./fonts/bentonsans-bold-webfont.ttf');
+    font-weight: 700;
+    font-style: normal;
+}
 $main-font:'American Captain',sans-serif;
 $font-text:'Benton Sans',sans-serif;
 
