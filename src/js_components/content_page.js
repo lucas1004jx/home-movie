@@ -17,13 +17,18 @@ property: title,original tilte,vote_averge,overview,release_Date,popularity
 import React,{Component} from 'react';
 import Movie from './movie';
 import Display from './display_movie';
+import {fetchMovies} from '../actions/fetchMovies';
+import {connect} from 'react-redux';
+import {MOVIE_LIST} from '../actions/fetchMovies';
+
+
 
 const URL = 'https://api.themoviedb.org/3/search/movie?api_key=89deb61f12ed0e8450259381e3836d63&language=es&query=';
 const IMG_URL='https://image.tmdb.org/t/p/w342/';
 const POSTER_URL='https://image.tmdb.org/t/p/w500/';
-const MOVIE_LIST = ['Ant-Man and the Wasp', 'upgrade', 'la monja', 'Venom', 'first man', 'aquaman', 'Bohemian Rhapsody', 'Los increíbles 2', 'A Star Is Born', 'La casa del reloj en la pared', 'Smallfoot','Megalodón','el depredador','el regreso de mary poppins','alpha','equalizer 2','johnny english 3','coco'];
+// const MOVIE_LIST = ['Ant-Man and the Wasp', 'upgrade', 'la monja', 'Venom', 'first man', 'aquaman', 'Bohemian Rhapsody', 'Los increíbles 2', 'A Star Is Born', 'La casa del reloj en la pared', 'Smallfoot','Megalodón','el depredador','el regreso de mary poppins','alpha','equalizer 2','johnny english 3','coco'];
 const MOVIE_DISPLAY='Venom';
-export default class ContentPage extends Component{
+ class ContentPage extends Component{
     constructor(props){
       super(props);
       this.state={display:MOVIE_DISPLAY};
@@ -31,12 +36,15 @@ export default class ContentPage extends Component{
     }
 
     componentDidMount(){
-        MOVIE_LIST.map((movie)=>
-        fetch(URL+movie)
-        .then((response)=>response.json())
-        .then((data)=>this.setState({[movie]:data}))
-        .catch((error)=>console.log('Fail to find movie'))
-        )
+        
+        // MOVIE_LIST.map((movie)=>
+        // axios.get(URL+movie)
+        // .then((movieData)=>this.setState({[movie]:movieData.data}))
+        // .catch((error)=>console.log('Fail to find movie'))
+        // )
+        this.props.fetchMovies();
+          
+           
     }
 
     handleOnClik(movie){
@@ -44,14 +52,10 @@ export default class ContentPage extends Component{
     }
 
 render(){
-    if( Object.keys(this.state).length>MOVIE_LIST.length){
-        let i=0;
-        {MOVIE_LIST.map((movie,index)=>{   
-            console.log(i);
-            console.log(this.state[movie].results[0])
-            i++;
-           }
-           )}
+    //console.log(this.props.movies);
+    
+    if( this.props.movies.length<MOVIE_LIST.length){
+        return <div></div>;
        }
        let display_movie=this.state.display;
       
@@ -86,3 +90,8 @@ render(){
     )
 }
 }
+const mapStatetoProps=state=>({
+    movies:state.movies.data
+})
+
+export default connect(mapStatetoProps,{fetchMovies})(ContentPage);
