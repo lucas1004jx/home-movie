@@ -8,16 +8,12 @@ import React, { Component } from 'react';
 export default class Movie extends Component {
     constructor(props){
       super(props);
-      this.handleOnClick=this.handleOnClick.bind(this);
+      
     }
-    handleOnClick(){
-        let movie=this.props.movie;
-       this.props.onClick(movie);
-        
-    }
+  
     render() { 
         return (    
-                <li className='movie' onClick={this.handleOnClick}>
+                <li className='movie' onClick={this.props.onClick} data-title={this.props.name}>
                 <div className='info'>
                 <h2 className='title'>{this.props.title}</h2>
                 <p className='original-title'>({this.props.original_title})</p>
@@ -30,3 +26,4 @@ export default class Movie extends Component {
         )
     }
 }
+

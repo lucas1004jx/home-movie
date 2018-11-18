@@ -1,4 +1,5 @@
 import {FETCH_MOVIES} from '../actions/types';
+import {SELECT_DISPLAY} from '../actions/types';
 import {MOVIE_LIST} from '../actions/fetchMovies';
 
 const initialState={
@@ -12,7 +13,12 @@ export default function(state=initialState,action){
         return{
             ...state,
             data:action.payload,
-            display:action.payload.slice(-1)[0]
+            display:MOVIE_LIST.slice(-1)[0]
+        }
+        case SELECT_DISPLAY:
+        return{
+            ...state,
+            display:action.payload
         }
         default:
         return state;

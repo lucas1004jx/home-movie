@@ -1,1 +1,2 @@
 export const FETCH_MOVIES='FETCH_MOVIES';
+export const SELECT_DISPLAY='SELECT_DISPLAY';

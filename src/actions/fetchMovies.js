@@ -8,10 +8,10 @@ export const MOVIE_LIST = ['Ant-Man and the Wasp', 'upgrade', 'la monja', 'Venom
 let movie_data=[];
 export const fetchMovies=()=>dispatch=>{
     MOVIE_LIST.map((movie)=>axios.get(URL+movie)
-     .then((movie)=>movie_data=[...movie_data,movie.data.results[0]])
-    .then((movie)=>dispatch({
+     .then((res)=>movie_data=[...movie_data,{[movie]:res.data.results[0]}])
+    .then((data)=>dispatch({
         type:FETCH_MOVIES,
-        payload:movie_data
+        payload:data
     }))
     );
 }
