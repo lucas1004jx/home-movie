@@ -20,16 +20,10 @@ import React,{Component} from 'react';
 
 export default class Display extends Component{
     render(){
-        const posterStyle={
-            backgroundImage:`url(${this.props.poster})`,
-            backgroundRepeat:'no-repeat',
-            backgroundPosition:'center center',
-            backgroundSize:'cover'
-        }
         return(
          <div className="poster-descri">
         <div className="poster">
-        <img src={this.props.poster}/>
+        <img src={this.props.poster} alt={this.props.title}/>
         </div>
         <div className="descri">
         <div className="title-container">
