@@ -81,5 +81,19 @@
     .movie ~ .movie{
        margin-left: 10px;
     }
-   
+    .addMovie{
+        @extend .movie;
+        &:after{
+            content: none;
+        }
+        .addButton{
+            fill:#fff;
+            width: 80px;
+            @include absCenterAll;
+            transition: fill 0.2s linear;  
+        }
+        &:hover .addButton{
+            fill:$search-icon;
+        }
+    }
 }

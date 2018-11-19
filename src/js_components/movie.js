@@ -6,11 +6,7 @@ import React, { Component } from 'react';
 // const MOVIE_LIST = ['Ant-Man and the Wasp', 'upgrade', 'la monja', 'Venom', 'first man', 'aquaman', 'Bohemian Rhapsody', 'Los increíbles 2', 'A Star Is Born', 'La casa del reloj en la pared', 'Smallfoot'];
 
 export default class Movie extends Component {
-    constructor(props){
-      super(props);
-      
-    }
-  
+    
     render() { 
         return (    
                 <li className='movie' onClick={this.props.onClick} data-title={this.props.name}>

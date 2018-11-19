@@ -21,14 +21,14 @@ import {fetchMovies} from '../actions/fetchMovies';
 import {selectDisplay} from '../actions/selectDisplay';
 import {connect} from 'react-redux';
 import {MOVIE_LIST} from '../actions/fetchMovies';
-
+import AddButton from './addButton';
 
 
 // const URL = 'https://api.themoviedb.org/3/search/movie?api_key=89deb61f12ed0e8450259381e3836d63&language=es&query=';
 const IMG_URL='https://image.tmdb.org/t/p/w342/';
 const POSTER_URL='https://image.tmdb.org/t/p/w500/';
 // const MOVIE_LIST = ['Ant-Man and the Wasp', 'upgrade', 'la monja', 'Venom', 'first man', 'aquaman', 'Bohemian Rhapsody', 'Los increíbles 2', 'A Star Is Born', 'La casa del reloj en la pared', 'Smallfoot','Megalodón','el depredador','el regreso de mary poppins','alpha','equalizer 2','johnny english 3','coco'];
-const MOVIE_DISPLAY='Venom';
+
  class ContentPage extends Component{
 
     componentDidMount(){
@@ -50,7 +50,7 @@ render(){
         return <div></div>;
        }
        let movies=this.props.movies;
-       let display_movie_data=this.props.movies.filter((movie_data)=>Object.keys(movie_data)==this.props.displayedMovie)[0];
+       let display_movie_data=this.props.movies.filter((movie_data)=>Object.keys(movie_data)[0]===this.props.displayedMovie)[0];
        let display_movie=Object.values(display_movie_data)[0];
      
     return(
@@ -68,7 +68,7 @@ render(){
         <ul className='movies'>
         {movies.length>=MOVIE_LIST.length?
         MOVIE_LIST.map((movie_name,index)=>{
-        let movie=movies.filter((movie_data)=>Object.keys(movie_data)==movie_name)[0][movie_name];
+        let movie=movies.filter((movie_data)=>Object.keys(movie_data)[0]===movie_name)[0][movie_name];
         
         return <Movie title={movie.title}
         name={movie_name}
@@ -82,6 +82,9 @@ render(){
         />
         })
         :null}
+       <li className="addMovie">
+         <AddButton className="addButton"/>
+       </li>
         </ul>
         </div>
     )
