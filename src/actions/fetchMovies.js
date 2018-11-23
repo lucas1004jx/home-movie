@@ -12,7 +12,7 @@ export const fetchMovies=()=>dispatch=>{
     .then((data)=>dispatch({
         type:FETCH_MOVIES,
         payload:data
-    }))
+    })).catch((error)=>console.log('network isn´t working'))
     );
 }
 

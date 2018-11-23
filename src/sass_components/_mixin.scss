@@ -16,3 +16,17 @@
     top:50%;
     transform: translateY(-50%);
 }
+@mixin  flexCenter() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin fadeIn {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}

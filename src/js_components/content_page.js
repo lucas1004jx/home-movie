@@ -19,10 +19,12 @@ import Movie from './movie';
 import Display from './display_movie';
 import {fetchMovies} from '../actions/fetchMovies';
 import {selectDisplay} from '../actions/selectDisplay';
+import {addMovie} from '../actions/addMovie';
 import {connect} from 'react-redux';
 import {MOVIE_LIST} from '../actions/fetchMovies';
 import AddButton from './addButton';
 
+import NewMovieInput from './newMovieInput';
 
 // const URL = 'https://api.themoviedb.org/3/search/movie?api_key=89deb61f12ed0e8450259381e3836d63&language=es&query=';
 const IMG_URL='https://image.tmdb.org/t/p/w342/';
@@ -39,7 +41,7 @@ const POSTER_URL='https://image.tmdb.org/t/p/w500/';
         // .catch((error)=>console.log('Fail to find movie'))
         // )
         this.props.fetchMovies();
-           
+        
     }
 
 
@@ -47,7 +49,17 @@ render(){
     //console.log(this.props);
     
     if( this.props.movies.length<MOVIE_LIST.length){
-        return <div></div>;
+        return (
+        <div className="main-content">
+        {this.props.add?<NewMovieInput/>:null}
+        <ul className="movies">
+        
+        <li className="addMovie" onClick={this.props.addMovie}>
+         <AddButton className="addButton" />
+       </li>
+       </ul>
+        </div>
+        );
        }
        let movies=this.props.movies;
        let display_movie_data=this.props.movies.filter((movie_data)=>Object.keys(movie_data)[0]===this.props.displayedMovie)[0];
@@ -55,6 +67,7 @@ render(){
      
     return(
         <div className="main-content">
+        {this.props.add?<NewMovieInput/>:null}
         {movies.length>=MOVIE_LIST.length?
         <Display 
         title={display_movie.title}
@@ -82,8 +95,8 @@ render(){
         />
         })
         :null}
-       <li className="addMovie">
-         <AddButton className="addButton"/>
+       <li className="addMovie" onClick={this.props.addMovie}>
+         <AddButton className="addButton" />
        </li>
         </ul>
         </div>
@@ -92,7 +105,8 @@ render(){
 }
 const mapStatetoProps=state=>({
     movies:state.movies.data,
-    displayedMovie:state.movies.display
+    displayedMovie:state.movies.display,
+    add:state.editMovie.add
 })
 
-export default connect(mapStatetoProps,{fetchMovies,selectDisplay})(ContentPage);
+export default connect(mapStatetoProps,{fetchMovies,selectDisplay,addMovie})(ContentPage);
