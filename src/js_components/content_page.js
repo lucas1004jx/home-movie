@@ -19,11 +19,12 @@ import Movie from './movie';
 import Display from './display_movie';
 import {fetchMovies} from '../actions/fetchMovies';
 import {selectDisplay} from '../actions/selectDisplay';
-import {addMovie} from '../actions/addMovie';
+import {addMovieButton} from '../actions/addMovieButton';
+import {addMovie} from '../actions/fetchMovies';
+import {closeAddInput} from '../actions/closeAddInput';
+import {typeNewMovie} from '../actions/typeNewMovie';
 import {connect} from 'react-redux';
-import {MOVIE_LIST} from '../actions/fetchMovies';
 import AddButton from './addButton';
-
 import NewMovieInput from './newMovieInput';
 
 // const URL = 'https://api.themoviedb.org/3/search/movie?api_key=89deb61f12ed0e8450259381e3836d63&language=es&query=';
@@ -32,6 +33,12 @@ const POSTER_URL='https://image.tmdb.org/t/p/w500/';
 // const MOVIE_LIST = ['Ant-Man and the Wasp', 'upgrade', 'la monja', 'Venom', 'first man', 'aquaman', 'Bohemian Rhapsody', 'Los increíbles 2', 'A Star Is Born', 'La casa del reloj en la pared', 'Smallfoot','Megalodón','el depredador','el regreso de mary poppins','alpha','equalizer 2','johnny english 3','coco'];
 
  class ContentPage extends Component{
+    constructor(){
+        super();
+        this.onChangeHandler=this.onChangeHandler.bind(this);
+        this.onConfirmHandler=this.onConfirmHandler.bind(this);
+        this.onCloseHandler=this.onCloseHandler.bind(this);
+    }
 
     componentDidMount(){
         
@@ -44,31 +51,44 @@ const POSTER_URL='https://image.tmdb.org/t/p/w500/';
         
     }
 
+    onChangeHandler(e){
+     this.props.typeNewMovie(e.target.value);
+    }
+  onConfirmHandler(){
+      this.props.addMovie(this.props.newMovie);
+      this.props.closeAddInput();
+  }
+  
+  onCloseHandler(){
+    this.props.closeAddInput();
+  }
 
 render(){
-    //console.log(this.props);
-    
-    if( this.props.movies.length<MOVIE_LIST.length){
+    if(this.props.add){
+        document.body.style.overflowY='hidden';
+    }else{
+        document.body.style.overflowY='scroll';
+    }
+    console.log(this.props);
+    let movies=this.props.movies;
+    if( movies.length<1){
         return (
         <div className="main-content">
         {this.props.add?<NewMovieInput/>:null}
         <ul className="movies">
-        
-        <li className="addMovie" onClick={this.props.addMovie}>
+        <li className="addMovie" onClick={this.props.addMovieButton}>
          <AddButton className="addButton" />
        </li>
        </ul>
         </div>
         );
        }
-       let movies=this.props.movies;
-       let display_movie_data=this.props.movies.filter((movie_data)=>Object.keys(movie_data)[0]===this.props.displayedMovie)[0];
-       let display_movie=Object.values(display_movie_data)[0];
+       
+       let display_movie=Object.values(this.props.displayedMovie)[0];
      
     return(
         <div className="main-content">
-        {this.props.add?<NewMovieInput/>:null}
-        {movies.length>=MOVIE_LIST.length?
+        {this.props.add?<NewMovieInput onConfirm={this.onConfirmHandler} onChange={this.onChangeHandler}onClose={this.onCloseHandler}/>:null}
         <Display 
         title={display_movie.title}
         original_title={display_movie.original_title}
@@ -77,25 +97,24 @@ render(){
         date={display_movie.release_date}
         poster={POSTER_URL+display_movie.poster_path}
         overview={display_movie.overview}
-        />:null}
+        />
         <ul className='movies'>
-        {movies.length>=MOVIE_LIST.length?
-        MOVIE_LIST.map((movie_name,index)=>{
-        let movie=movies.filter((movie_data)=>Object.keys(movie_data)[0]===movie_name)[0][movie_name];
-        
-        return <Movie title={movie.title}
+        {
+        movies.map((movie,index)=>{
+        let movie_data=Object.values(movie)[0];
+        let movie_name=Object.keys(movie)[0];
+        return <Movie title={movie_data.title}
         name={movie_name}
-        original_title={movie.original_title}
-        votes={movie.vote_average}
-        date={movie.release_date}
-        poster={IMG_URL+movie.poster_path}
-        key={index}
-        movie={movie}
+        original_title={movie_data.original_title}
+        votes={movie_data.vote_average}
+        date={movie_data.release_date}
+        poster={IMG_URL+movie_data.poster_path}
+        key={movie_data.id}
         onClick={this.props.selectDisplay}
         />
         })
-        :null}
-       <li className="addMovie" onClick={this.props.addMovie}>
+        }
+       <li className="addMovie" onClick={this.props.addMovieButton}>
          <AddButton className="addButton" />
        </li>
         </ul>
@@ -106,7 +125,8 @@ render(){
 const mapStatetoProps=state=>({
     movies:state.movies.data,
     displayedMovie:state.movies.display,
-    add:state.editMovie.add
+    add:state.editMovie.add,
+    newMovie:state.movies.newMovie
 })
 
-export default connect(mapStatetoProps,{fetchMovies,selectDisplay,addMovie})(ContentPage);
+export default connect(mapStatetoProps,{fetchMovies,selectDisplay,addMovieButton,addMovie,typeNewMovie,closeAddInput})(ContentPage);

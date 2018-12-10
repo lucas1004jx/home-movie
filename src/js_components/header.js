@@ -1,10 +1,11 @@
 import React,{Component} from 'react';
-import fire from '../fire';
+import {movieRef} from '../firebase';
 export default class Header extends Component{
     
     render(){
-        let dbRef=fire.database().ref().child('movies');
-        dbRef.on('value',snap=>console.log(snap.val()))
+        
+        //movieRef.on('value',snap=>console.log(snap.val()));
+        //movieRef.push().set('lala land:lal');
         return(
             <div className="header">
             <h2 >Luqui Y Mati´s</h2>

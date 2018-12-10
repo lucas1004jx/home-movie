@@ -11,5 +11,6 @@ import firebase from 'firebase';
   };
   
 
-  const fire = firebase.initializeApp(config);
-  export default fire;
+  firebase.initializeApp(config);
+  const databaseRef=firebase.database().ref();
+  export const movieRef=databaseRef.child('movies');

@@ -1,4 +1,4 @@
-import {ADD_MOVIE} from '../actions/types';
+import {ADD_MOVIE_BUTTON} from '../actions/types';
 import {CLOSE_ADD_INPUT} from '../actions/types';
 
 const initialState={
@@ -7,7 +7,7 @@ const initialState={
 
 export default function(state=initialState,action){
     switch(action.type){
-        case ADD_MOVIE:
+        case ADD_MOVIE_BUTTON:
         return{
             ...state,
             add:action.payload

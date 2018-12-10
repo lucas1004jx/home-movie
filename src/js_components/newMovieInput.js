@@ -5,18 +5,16 @@ import {connect} from 'react-redux';
 const NewMovieInput=(props)=>(
     <div className="newMovieInput-container">
     <form className="newMovieInput">
-        <input type="text" placeholder="Escribe el nombre de la película que quieres añadir"/>
+        <input type="text" placeholder="Escribe el nombre de la película que quieres añadir" onChange={props.onChange}/>
         <div className="buttons">
-        <button type="submit" onClick={props.closeAddInput}>cancelar</button>
+        <button type="submit" onClick={props.onClose}>cancelar</button>
         <button type="submit">preview</button>
-        <button type="submit">confirmar</button>
+        <button  type="submit" onClick={props.onConfirm}>confirmar</button>
         </div>
     </form>
     </div>
 )
 
-const mapStatetoprops=state=>({
-    add:state.editMovie.add
-})
 
-export default connect(mapStatetoprops,{closeAddInput})(NewMovieInput);
+
+export default NewMovieInput;
