@@ -9,7 +9,10 @@ export default class Movie extends Component {
     
     render() { 
         return (    
-                <li className='movie' onClick={this.props.onClick} data-title={this.props.name}>
+                <li className='movie' onClick={this.props.onClick} data-title={this.props.title}>
+                <div className='delete-container' onClick={this.props.onDelete} data-id={this.props.id}>
+                <span className='delete'></span>
+                </div>
                 <div className='info'>
                 <h2 className='title'>{this.props.title}</h2>
                 <p className='original-title'>({this.props.original_title})</p>

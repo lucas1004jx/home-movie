@@ -20,9 +20,7 @@ import Display from './display_movie';
 import {fetchMovies} from '../actions/fetchMovies';
 import {selectDisplay} from '../actions/selectDisplay';
 import {addMovieButton} from '../actions/addMovieButton';
-import {addMovie} from '../actions/fetchMovies';
-import {closeAddInput} from '../actions/closeAddInput';
-import {typeNewMovie} from '../actions/typeNewMovie';
+import {removeMovie} from '../actions/fetchMovies';
 import {connect} from 'react-redux';
 import AddButton from './addButton';
 import NewMovieInput from './newMovieInput';
@@ -33,36 +31,25 @@ const POSTER_URL='https://image.tmdb.org/t/p/w500/';
 // const MOVIE_LIST = ['Ant-Man and the Wasp', 'upgrade', 'la monja', 'Venom', 'first man', 'aquaman', 'Bohemian Rhapsody', 'Los increíbles 2', 'A Star Is Born', 'La casa del reloj en la pared', 'Smallfoot','Megalodón','el depredador','el regreso de mary poppins','alpha','equalizer 2','johnny english 3','coco'];
 
  class ContentPage extends Component{
-    constructor(){
-        super();
-        this.onChangeHandler=this.onChangeHandler.bind(this);
-        this.onConfirmHandler=this.onConfirmHandler.bind(this);
-        this.onCloseHandler=this.onCloseHandler.bind(this);
-    }
-
-    componentDidMount(){
-        
+constructor(){
+    super();
+    this.onDeleteHandler=this.onDeleteHandler.bind(this);
+}
+    componentDidMount(){ 
         // MOVIE_LIST.map((movie)=>
         // axios.get(URL+movie)
         // .then((movieData)=>this.setState({[movie]:movieData.data}))
         // .catch((error)=>console.log('Fail to find movie'))
         // )
-        this.props.fetchMovies();
-        
+        this.props.fetchMovies();   
+       
     }
-
-    onChangeHandler(e){
-     this.props.typeNewMovie(e.target.value);
+    
+    onDeleteHandler(e){
+        e.stopPropagation();
+        console.log(e.target.dataset.id);
+        this.props.removeMovie(e.target.dataset.id);
     }
-  onConfirmHandler(){
-      this.props.addMovie(this.props.newMovie);
-      this.props.closeAddInput();
-  }
-  
-  onCloseHandler(){
-    this.props.closeAddInput();
-  }
-
 render(){
     if(this.props.add){
         document.body.style.overflowY='hidden';
@@ -74,7 +61,7 @@ render(){
     if( movies.length<1){
         return (
         <div className="main-content">
-        {this.props.add?<NewMovieInput/>:null}
+         {this.props.add?<NewMovieInput/>:null}
         <ul className="movies">
         <li className="addMovie" onClick={this.props.addMovieButton}>
          <AddButton className="addButton" />
@@ -88,7 +75,7 @@ render(){
      
     return(
         <div className="main-content">
-        {this.props.add?<NewMovieInput onConfirm={this.onConfirmHandler} onChange={this.onChangeHandler}onClose={this.onCloseHandler}/>:null}
+        {this.props.add?<NewMovieInput />:null}
         <Display 
         title={display_movie.title}
         original_title={display_movie.original_title}
@@ -102,15 +89,16 @@ render(){
         {
         movies.map((movie,index)=>{
         let movie_data=Object.values(movie)[0];
-        let movie_name=Object.keys(movie)[0];
+        let movie_id=Object.keys(movie)[0];
         return <Movie title={movie_data.title}
-        name={movie_name}
         original_title={movie_data.original_title}
         votes={movie_data.vote_average}
         date={movie_data.release_date}
         poster={IMG_URL+movie_data.poster_path}
-        key={movie_data.id}
+        key={movie_id}
+        id={movie_id}
         onClick={this.props.selectDisplay}
+        onDelete={this.onDeleteHandler}
         />
         })
         }
@@ -129,4 +117,4 @@ const mapStatetoProps=state=>({
     newMovie:state.movies.newMovie
 })
 
-export default connect(mapStatetoProps,{fetchMovies,selectDisplay,addMovieButton,addMovie,typeNewMovie,closeAddInput})(ContentPage);
+export default connect(mapStatetoProps,{fetchMovies,selectDisplay,addMovieButton,removeMovie})(ContentPage);

@@ -9,17 +9,29 @@ export const MOVIE_LIST = ['Ant-Man and the Wasp', 'upgrade', 'la monja', 'Venom
 
 export const fetchMovies=()=>dispatch=>{
     movieRef.on('value',snapshot=>{
-    let movie_data=[];
-    console.log(snapshot.val());
-    
-    Object.values(snapshot.val()).map((movie)=>axios.get(URL+movie)
-    .then((res)=>movie_data=[...movie_data,{[movie]:res.data.results[0]}])
-   .then((data)=>dispatch({
-       type:FETCH_MOVIES,
-       payload:data
-   })).catch((error)=>console.log('network isn´t working'))
-   )});
+        let movie_data=[];
+        let dataBase=snapshot.val();
+    console.log(dataBase);
+    if(dataBase == null){return dispatch({type:FETCH_MOVIES,payload:''})}
+    for(let key in dataBase){
+        let movie=dataBase[key];
+        axios.get(URL+movie)
+        .then((res)=>movie_data=[...movie_data,{[key]:res.data.results[0]}])
+        .then((data)=>dispatch({
+           type:FETCH_MOVIES,
+           payload:data
+       })).catch((error)=>console.log('network isn´t working'));
+    }
+})
 }
+//     Object.values(snapshot.val()).map((movie)=>axios.get(URL+movie)
+//     .then((res)=>movie_data=[...movie_data,{[movie]:res.data.results[0]}])
+//    .then((data)=>dispatch({
+//        type:FETCH_MOVIES,
+//        payload:data
+//    })).catch((error)=>console.log('network isn´t working'))
+//    )});
+//}
 
 // export const fetchMovies=()=> dispatch=>{
 //     movieRef.on('value',snapshot=>{
@@ -31,9 +43,13 @@ export const fetchMovies=()=>dispatch=>{
 // }
 
 export const addMovie=(movie)=>dispatch=>{
-    console.log(movie);
-    
+   
     movieRef.push().set(movie);
+}
+
+export const removeMovie=(movie_id)=>dispatch=>{
+  movieRef.child(movie_id).remove();
+  
 }
 
 
