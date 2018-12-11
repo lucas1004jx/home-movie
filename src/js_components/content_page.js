@@ -56,7 +56,7 @@ render(){
     }else{
         document.body.style.overflowY='scroll';
     }
-    console.log(this.props);
+    //console.log(this.props);
     let movies=this.props.movies;
     if( movies.length<1){
         return (

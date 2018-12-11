@@ -1,6 +1,7 @@
 import {FETCH_MOVIES} from '../actions/types';
 import {SELECT_DISPLAY} from '../actions/types';
 import {TYPE_NEW_MOVIE} from '../actions/types';
+import {ADD_MOVIE} from '../actions/types';
 import {REMOVE_MOVIE} from '../actions/types';
 
 const initialState={
@@ -13,7 +14,6 @@ export default (state=initialState,action)=>{
     switch(action.type){
         case FETCH_MOVIES:
         //console.log(action.payload);
-        
         return{
             ...state,
             data:action.payload,
@@ -30,7 +30,19 @@ export default (state=initialState,action)=>{
             ...state,
             newMovie:action.payload
         }
-    
+        case ADD_MOVIE: 
+        return{
+            ...state,
+            data:[...state.data,{[action.key]:action.payload}],
+            display:{[action.key]:action.payload}
+        }
+        case REMOVE_MOVIE:
+        let data=[...state.data].filter((data)=> Object.keys(data)[0] !== action.payload);
+        return{
+            ...state,
+            data:data,
+            display:data.slice(-1)[0]
+        }
         default:
         return state;
     }

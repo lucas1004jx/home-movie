@@ -5,6 +5,6 @@ export const selectDisplay=(e)=>dispatch=>{
     
     dispatch({
         type:SELECT_DISPLAY,
-        payload:e.target.dataset.title
+        payload:e.target.dataset.id
     })
 }
