@@ -1,9 +1,18 @@
 
 import {TYPE_NEW_MOVIE} from './types';
-
+import axios from 'axios';
+const URL = 'https://api.themoviedb.org/3/search/movie?api_key=89deb61f12ed0e8450259381e3836d63&language=es&query=';
  export const typeNewMovie=(movie)=>dispatch=>(
+    axios.get(URL+movie).then((res)=>{
+        let list=[];
+        let results=res.data.results.slice(0,10);
+        results.map((movie)=>list=[...list,{title:movie.title,time:movie.release_date}]);
+        return list;
+    }).then((list)=>
     dispatch({
         type:TYPE_NEW_MOVIE,
-        payload:movie
+        payload:movie,
+        list:list
     })
+    ) 
 )

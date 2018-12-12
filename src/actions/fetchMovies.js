@@ -31,7 +31,10 @@ export const fetchMovies=()=>dispatch=>{
 // }
 export const addMovie=(movie)=>dispatch=>{   
     axios.get(URL+movie)
-    .then((res)=>res.data.results[0])
+    .then((res)=>{ 
+        if(res.data.results[0]===undefined){alert('Esta película no existe!');throw 'no existe'}
+        return res.data.results[0]
+    })
     .then((data)=>{
         let key='';
         movieRef.once('child_added',(child)=>{

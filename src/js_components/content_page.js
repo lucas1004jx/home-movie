@@ -18,9 +18,7 @@ import React,{Component} from 'react';
 import Movie from './movie';
 import Display from './display_movie';
 import {fetchMovies} from '../actions/fetchMovies';
-import {selectDisplay} from '../actions/selectDisplay';
 import {addMovieButton} from '../actions/addMovieButton';
-import {removeMovie} from '../actions/fetchMovies';
 import {connect} from 'react-redux';
 import AddButton from './addButton';
 import NewMovieInput from './newMovieInput';
@@ -31,25 +29,12 @@ const POSTER_URL='https://image.tmdb.org/t/p/w500/';
 // const MOVIE_LIST = ['Ant-Man and the Wasp', 'upgrade', 'la monja', 'Venom', 'first man', 'aquaman', 'Bohemian Rhapsody', 'Los increíbles 2', 'A Star Is Born', 'La casa del reloj en la pared', 'Smallfoot','Megalodón','el depredador','el regreso de mary poppins','alpha','equalizer 2','johnny english 3','coco'];
 
  class ContentPage extends Component{
-constructor(){
-    super();
-    this.onDeleteHandler=this.onDeleteHandler.bind(this);
-}
+
     componentDidMount(){ 
-        // MOVIE_LIST.map((movie)=>
-        // axios.get(URL+movie)
-        // .then((movieData)=>this.setState({[movie]:movieData.data}))
-        // .catch((error)=>console.log('Fail to find movie'))
-        // )
-        this.props.fetchMovies();   
-       
+        this.props.fetchMovies();       
     }
     
-    onDeleteHandler(e){
-        e.stopPropagation();
-        console.log(e.target.dataset.id);
-        this.props.removeMovie(e.target.dataset.id);
-    }
+   
 render(){
     if(this.props.add){
         document.body.style.overflowY='hidden';
@@ -97,8 +82,6 @@ render(){
         poster={IMG_URL+movie_data.poster_path}
         key={movie_id}
         id={movie_id}
-        onClick={this.props.selectDisplay}
-        onDelete={this.onDeleteHandler}
         />
         })
         }
@@ -117,4 +100,4 @@ const mapStatetoProps=state=>({
     newMovie:state.movies.newMovie
 })
 
-export default connect(mapStatetoProps,{fetchMovies,selectDisplay,addMovieButton,removeMovie})(ContentPage);
+export default connect(mapStatetoProps,{fetchMovies,addMovieButton})(ContentPage);

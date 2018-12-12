@@ -7,7 +7,8 @@ import {REMOVE_MOVIE} from '../actions/types';
 const initialState={
     data:[],
     display:'',
-    newMovie:''
+    newMovie:'',
+    movieSuggestion:[]
 }
 
 export default (state=initialState,action)=>{
@@ -28,7 +29,8 @@ export default (state=initialState,action)=>{
         case TYPE_NEW_MOVIE:
         return{
             ...state,
-            newMovie:action.payload
+            newMovie:action.payload,
+            movieSuggestion:action.list
         }
         case ADD_MOVIE: 
         return{
