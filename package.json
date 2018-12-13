@@ -2,6 +2,7 @@
   "name": "home-movie",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "https://lucas1004jx.github.io/home-movie/",
   "dependencies": {
     "axios": "^0.18.0",
     "firebase": "^5.5.8",

@@ -2,10 +2,11 @@
 @import 'movies.scss';
 @import 'newMovieInput.scss';
 .main-content{
-    min-height:calc(100vh - 40px);
+  height: 100vh;
+     min-height:678px;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows:  480px minmax(300px,350px);
+    grid-template-rows:  400px minmax(200px,350px);
     grid-template-areas:  'poster-descri' 'movies';
    background-color: #000;
     

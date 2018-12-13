@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import logo from '../images/logo.png';
 
-const menuItems=['todas','vistas','lista de deseo'];
+const menuItems=[];
 export default class Nav extends Component{
 render(){
     return(

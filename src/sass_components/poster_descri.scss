@@ -2,9 +2,16 @@
     grid-area: poster-descri;
     background-color: #000;
     display: grid;
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 350px 1fr;
     grid-template-rows: 100%;
     grid-template-areas: 'poster descri';
+    padding-top: 25px;
+    @include break(769px,999px){
+        grid-template-columns: 300px 1fr;
+    }
+    @include break(600px,768px){
+        grid-template-columns: 280px 1fr;
+    }
     .poster{
         grid-area: poster;
         width: 100%;
@@ -16,6 +23,9 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+        @include break(769px,999px){
+            padding: 10px;
+        }
       img{
           width: 100%;
           height: 100%;
@@ -33,32 +43,52 @@
         justify-content: flex-start;
         box-sizing: border-box;
         font-family: "Bentos Sans",sans-serif;
-        
+        @include break(769px,999px){
+            padding: 5px 10px;
+        }
         p{
             font-size: 16px;
             margin: 5px 0;
             font-weight: 500;
+            @include break(769px,999px){
+                font-size: 14px;
+            }
         }
         h2{
             font-size: 24px;
             margin: 10px 0;
             font-weight: 700;
+            @include break(769px,999px){
+                font-size: 16px;
+            }
         }
         h3{
             font-size: 18px;
             margin: 10px 0;
             font-weight: 700;
+            @include break(769px,999px){
+                font-size: 14px;
+            }
         }
         .title-container{
             margin-bottom: 15px;
+            @include break(769px,999px){
+               margin-bottom: 0px;
+            }
             .title{
                 span{
                     color:orange;
+                    @include break(769px,999px){
+                        display: block;
+                    }
                 }
             }
             .original-title{
                 span{
                     color:orange;
+                    @include break(769px,999px){
+                        display: block;
+                    }
                 }
             }
         }
@@ -89,7 +119,6 @@
         .overview-container{
             overflow: hidden;
             position: relative;
-           
             &::after{
                 content: "";
                 position: absolute;
@@ -102,6 +131,7 @@
                 text-transform:none;
                 font-weight: normal;
                 line-height: 1.4;
+                height: 100px;
                 max-height: 200px;
                 overflow: scroll;
                 padding-bottom: 30px;
